@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
+import java.util.List;
+
 public class UserPageRepo {
     protected WebDriver driver;
 
@@ -67,5 +69,10 @@ public class UserPageRepo {
     //Validation
     @FindBy(xpath="//*[@ng-click='save(user)']")
     public WebElement saveBtn;
+
+
+
+    @FindBy(xpath = "//td[@ng-repeat='column in columns'][1]")
+    public List<WebElement> listUserName;
 
 }

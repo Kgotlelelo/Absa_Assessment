@@ -5,6 +5,7 @@ import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import extentReport.Reporting;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;;
 import org.openqa.selenium.WebElement;
@@ -69,61 +70,43 @@ public class UserPageObjects extends BaseClass {
         Thread.sleep(2000);
         webActions.SendKeysObject(userObj.password, driver, password);
 
-        /*
-        webActions.SendKeysObject(userObj.customer, driver, customer);
-        webActions.SendKeysObject(userObj.role, driver, role);
-       */
-
-        Thread.sleep(2000);
         if (customer.contains("AAA")){
+            webActions.ClickObject(userObj.customerAAA, driver);
 
-            driver.findElement(By.xpath("//*[@value='15']")).click();
         } else if (customer.contains("BBB")) {
-
-            driver.findElement(By.xpath("//*[@value='16']")).click();
+            webActions.ClickObject(userObj.customerBBB, driver);
         }
 
-        Thread.sleep(2000);
         if (role.contains("Admin")){
 
-            WebElement dropdownElementAdmin = driver.findElement(By.xpath("//*[@name='RoleId']"));
-
-            Select select = new Select(dropdownElementAdmin);
-            select.selectByVisibleText("Admin");
-           /* Select admin = new Select(dropdownElementAdmin);
-            admin.selectByIndex(0);;*/
+            webActions.SelectObject(userObj.role,driver,"Value","Admin");
 
         } else if (role.contains("Customer")) {
 
-            WebElement dropdownElementCustomer = driver.findElement(By.xpath("//*[@name='RoleId']"));
+
+            webActions.SelectObject(userObj.role,driver,"Value","Customer");
+
+          /*  WebElement dropdownElementCustomer = driver.findElement(By.xpath("//*[@name='RoleId']"));
             Select customers = new Select(dropdownElementCustomer);
-           // customers.selectByIndex(0);
-            customers.selectByVisibleText("Customer");
+            customers.selectByVisibleText("Customer");*/
 
         }
 
-        Thread.sleep(2000);
+
         webActions.SendKeysObject(userObj.email, driver, email);
 
-        Thread.sleep(2000);
+
         webActions.SendKeysObject(userObj.cell, driver, cell);
 
-
-
-        Thread.sleep(5000);
-        //driver.findElement(By.xpath("//*[@ng-click='save(user)']")).click();
+        node.pass("Details captured successfully",Reporting.CaptureScreenShot(driver));
         webActions.ClickObject(userObj.saveBtn, driver);
 
-
-        node.pass("Details captured successfully",Reporting.CaptureScreenShot(driver));
 
     }
 
     public void validateUserOnListTable(ExtentTest node) throws IOException {
 
-// Validate that you are on the User List Table
-
-
+       // Validate that you are on the User List Table
         node.pass("Before validation ",Reporting.CaptureScreenShot(driver));
         // validation
         if(userObj.valueInSearch.isDisplayed()){
@@ -140,44 +123,36 @@ public class UserPageObjects extends BaseClass {
 
     public void validateCustomer(String firstName, String lastName, String userName, ExtentTest node) throws InterruptedException, IOException {
 
+        node.pass("Tbale details Before validating ",Reporting.CaptureScreenShot(driver));
+
+        //Verify user on the correct Page
 
 
-        node.pass("Before validating ",Reporting.CaptureScreenShot(driver));
-        Thread.sleep(2000);
-        //Validate that user is added
-        driver.findElement(By.xpath("//*[@placeholder='Search']")).sendKeys(userName);
+        //Search using the UserName
+        webActions.SendKeysObject(userObj.searchBtn,driver,userName);
 
-        Thread.sleep(2000);
-        List<WebElement> getValue=  driver.findElements(By.xpath("//td[@ng-repeat='column in columns'][1]"));
 
-        if (getValue.size() >=1){
-            System.out.println("User found");
+        if (userObj.listUserName.size() >=1){
 
-            List<WebElement> userNameElements = driver.findElements(By.xpath("//td[@ng-repeat='column in columns'][1]"));
-            Set<String> userNames = new HashSet<>();
-            boolean allUnique = true;
+            for (int i = 1; i < userObj.listUserName.size(); i++) {
+                 String userNameValue =  userObj.listUserName.get(i).getText();
+                //String userNameValue =  userObj.listUserName.get(i).getAttribute("value");
 
-            for (WebElement userNameElement : userNameElements) {
-                String userNameValue = userNameElement.getText();
-                if (!userNames.add(userNameValue)) {
-                    allUnique = false;
-                    System.out.println("Duplicate User Name found: " + userNameValue);
-                    node.pass("BDuplicate User Name found ",Reporting.CaptureScreenShot(driver));
+                System.out.println(userNameValue);
+                if(userNameValue.equalsIgnoreCase(userName)){
+                    node.pass("Correct Username was found ", Reporting.CaptureScreenShot(driver));
+                }else {
+                    node.fail("unexpected name was found", Reporting.CaptureScreenShot(driver));
+                    Assert.fail("No location was found failed");
                 }
+
             }
 
-            if (allUnique) {
-                node.pass("All User Names are unique ",Reporting.CaptureScreenShot(driver));
-                System.out.println("All User Names are unique.");
-            } else {
-                System.out.println("There are duplicate User Names in the table.");
-                node.fail("There are duplicate User Names in the table. ",Reporting.CaptureScreenShot(driver));
-            }
 
 
 
         }else{
-            System.out.println("User not found");
+            System.out.println("UserName not found");
             node.fail("User not found ",Reporting.CaptureScreenShot(driver));
 
         }

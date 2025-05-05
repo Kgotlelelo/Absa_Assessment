@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <build>
@@ -98,12 +98,6 @@
             <version>7.11.2</version>
         </dependency>-->
 
-        <!-- https://mvnrepository.com/artifact/io.cucumber/gherkin -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>gherkin</artifactId>
-            <version>26.0.3</version>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
         <dependency>
@@ -117,6 +111,13 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>backend-module</artifactId>
+            <version>1.0.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -147,6 +148,8 @@
         </dependency>
 
     <!--dependecies for the absa assessment-->
+
+
 
         <dependency>
             <groupId>info.cukes</groupId>
