@@ -9,13 +9,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ExtentReportUtil {
-    private static ExtentReports extent;
-    private static ExtentTest test;
+    public static ExtentReports extent;
+    public static ExtentTest test;
 
     public static void setup() {
         String datetime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss"));;
-
-        ExtentSparkReporter spark = new ExtentSparkReporter(System.getProperty("user.dir")+"/reporting//apiReporting/api_automation"+ datetime+".html");
+        ExtentSparkReporter spark = new ExtentSparkReporter(System.getProperty("user.dir")+"/reporting/apiReporting/api_automation"+ datetime+".html");
         extent = new ExtentReports();
         extent.attachReporter(spark);
     }

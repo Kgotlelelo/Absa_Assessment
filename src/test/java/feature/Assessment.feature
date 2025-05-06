@@ -1,6 +1,4 @@
 Feature: My feature
-  Background:
-    #Given User launches a browser and navigates to the webpage
 
 @run
   Scenario Outline: Adding user and verify user is added

@@ -5,27 +5,31 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import dataReader.DataFunction;
 import pageObjects.UserPageObjects;
 import utilities.BaseClass;
 
 
 import java.io.IOException;
 
+import static dataReader.DataFunction.Browser;
+import static dataReader.DataFunction.Url;
 
 
 public class MyStepDefs extends BaseClass {
     UserPageObjects userPageObjects;
-    @Given("^User launches a browser and navigates to the webpage$")
+   /* @Given("^User launches a browser and navigates to the webpage$")
     public void userLaunchesABrowserAndNavigatesToTheWebpage() throws Exception {
+        DataFunction.dataFunction("Credentials",1);
 
-        System.out.println("Launching the browser");
-    }
+    }*/
 
     @Given("^user is on the homepage$")
     public void userIsOnTheHomepage() throws Exception {
+        DataFunction.dataFunction("Credentials",1);
         System.out.println("Launching the browser");
-        launchbrowser();
-         userPageObjects = new UserPageObjects(driver);
+        launchbrowser(Url,Browser);
+        userPageObjects = new UserPageObjects(driver);
         userPageObjects.addBtn(node);
     }
 

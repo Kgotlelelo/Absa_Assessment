@@ -79,12 +79,12 @@ public class UserPageObjects extends BaseClass {
 
         if (role.contains("Admin")){
 
-            webActions.SelectObject(userObj.role,driver,"Value","Admin");
+            webActions.SelectObject(userObj.role,driver,"Value","2");
 
         } else if (role.contains("Customer")) {
 
 
-            webActions.SelectObject(userObj.role,driver,"Value","Customer");
+            webActions.SelectObject(userObj.role,driver,"Value","1");
 
           /*  WebElement dropdownElementCustomer = driver.findElement(By.xpath("//*[@name='RoleId']"));
             Select customers = new Select(dropdownElementCustomer);
@@ -127,7 +127,6 @@ public class UserPageObjects extends BaseClass {
 
         //Verify user on the correct Page
 
-
         //Search using the UserName
         webActions.SendKeysObject(userObj.searchBtn,driver,userName);
 
@@ -149,12 +148,10 @@ public class UserPageObjects extends BaseClass {
             }
 
 
-
-
         }else{
             System.out.println("UserName not found");
             node.fail("User not found ",Reporting.CaptureScreenShot(driver));
-
+            Assert.fail("No username was found failed");
         }
     }
 }

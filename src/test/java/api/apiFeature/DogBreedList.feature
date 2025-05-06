@@ -1,10 +1,8 @@
 Feature: Retrieve list of dog Breed
 
-  Scenario Outline: Get a list of dog breed
+  @run
+  Scenario: Retrieve list of dog Breed
     Given the API endpoint is available
-    When I send a GET request to "<endpoint>"
-    Then I should receive a 200 status code
+    When I send a GET request to "breeds/list/all"
+    Then I should receive a "success" status
     And the response should contain a list of dogs
-    Examples:
-      | endpoint |
-      |https://dog.ceo/api/breeds/list/all|

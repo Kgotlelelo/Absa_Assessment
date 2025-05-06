@@ -47,18 +47,15 @@ Ensures that the users are added to the list.
 ## Setup
 
 1. **Clone the repository**:
-   ```bash
-  **************
-   ```
-
+==
 Install dependencies: If you are using Maven, add the following dependencies to your pom.xml:
 
 <dependencies>
-    <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>4.0.0</version>
-    </dependency>
+<dependency>
+<groupId>org.seleniumhq.selenium</groupId>
+<artifactId>selenium-java</artifactId>
+<version>4.0.0</version>
+ </dependency>
 </dependencies>
 
 ******************************Web*****************************************
@@ -118,9 +115,7 @@ diagram 4
 
 
 **Clone the repository**:
-   ```bash
-  **************
-   ```
+```
 
 
 API Endpoints

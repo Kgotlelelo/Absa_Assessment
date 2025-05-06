@@ -5,16 +5,18 @@ import java.io.IOException;
 public class DataFunction {
     //Define instance variables
     static ExcelReader data = new ExcelReader();
-    public static  String Username;
-    public static  String Password;
+
+    public static  String Browser;
+    public static  String Url;
 
 
 
     //Get the Excel data and Assign to the correct variable
     public static void dataFunction(String sheetName,int rowNum) throws IOException {
-        data.initializeWorkbook("Data/BookStore.xlsx");
-        Username = data.getCellData(sheetName,"UserName",rowNum);
-        Password = data.getCellData(sheetName,"Password",rowNum);
+        data.initializeWorkbook("Data/data.xlsx");
+        Browser = data.getCellData(sheetName,"browser",rowNum);
+        Url = data.getCellData(sheetName,"url",rowNum);
+
 
 
     }

@@ -1,10 +1,12 @@
 package api;
 
 import api.reporting.ExtentReportUtil;
+import cucumber.api.Scenario;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,19 +15,18 @@ import java.util.Properties;
 
 public class BaseClassAPI {
 
-    protected CloseableHttpClient httpClient;
-
+    protected static CloseableHttpClient httpClient;
+    Scenario scenario;
     @BeforeClass
-    public void setUp() {
+    public static void setUp() {
         // Initialize the HTTP client
         httpClient = HttpClients.createDefault();
-
         // Initialize the Extent Report
         ExtentReportUtil.setup();
     }
 
     @AfterClass
-    public void tearDown() {
+    public static void tearDown() {
         try {
             if (httpClient != null) {
                 httpClient.close();
@@ -37,7 +38,12 @@ public class BaseClassAPI {
         ExtentReportUtil.tearDown();
     }
 
+    public void Initialize() {
+        // Initialize the HTTP client
+        httpClient = HttpClients.createDefault();
+        // Initialize the Extent Report
 
+    }
     public String getConfigPropertyValue(String propertyFileName, String propertyName) {
         String Value = null;
         try {

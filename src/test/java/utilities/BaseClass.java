@@ -31,10 +31,7 @@ public class BaseClass {
     public static Scenario scenario;
     public Reporting reporting;
 
-    public WebDriver launchbrowser() throws Exception {
-
-       String url = getConfigPropertyValue("Framework.properties", "baseUrl");
-       String browser = getConfigPropertyValue("Framework.properties", "browser");
+    public WebDriver launchbrowser(String url, String browser) throws Exception {
 
         System.out.println(browser);
         System.out.println(url);
@@ -43,7 +40,7 @@ public class BaseClass {
         java.util.Date date = new java.util.Date();
         System.out.println(new Timestamp(date.getTime()));
         reporting = new Reporting();
-        repo = Reporting.initializeExtentReports("reporting/AssessmentReport.html");
+        repo = Reporting.initializeExtentReports("AssessmentReport.html");
         /*ExtentTest test = repo.createTest(scenario.getName() + new Timestamp(date.getTime())).assignAuthor("Kgotlelelo-Ratshoshi");*/
         ExtentTest test = repo.createTest("test" + new Timestamp(date.getTime())).assignAuthor("Kgotlelelo-Ratshoshi");
         node = test.createNode("ABSA Assessment");
